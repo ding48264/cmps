@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.gllg.isp.cmps.dao.TbAdminDao">
+
+    <resultMap id="BaseResultMap" type="com.example.gllg.isp.cmps.entity.TbAdmin">
+        <!--@Table tb_admin-->
+        <result property="itemid" column="itemid" jdbcType="INTEGER"/>
+        <result property="itemcode" column="itemcode" jdbcType="VARCHAR"/>
+        <result property="adminid" column="adminid" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="admincode" column="admincode" jdbcType="VARCHAR"/>
+        <result property="adminname" column="adminname" jdbcType="VARCHAR"/>
+        <result property="admintype" column="admintype" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="INTEGER"/>
+        <result property="sex" column="sex" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          itemid, itemcode, adminid, password, admincode, adminname, admintype, email, phone, sex
+        from cpms.tb_admin
+        where itemid = #{itemid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          itemid, itemcode, adminid, password, admincode, adminname, admintype, email, phone, sex
+        from cpms.tb_admin
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          itemid, itemcode, adminid, password, admincode, adminname, admintype, email, phone, sex
+        from cpms.tb_admin
+        <where>
+            <if test="itemid != null">
+                and itemid = #{itemid}
+            </if>
+            <if test="itemcode != null and itemcode != ''">
+                and itemcode = #{itemcode}
+            </if>
+            <if test="adminid != null and adminid != ''">
+                and adminid = #{adminid}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="admincode != null and admincode != ''">
+                and admincode = #{admincode}
+            </if>
+            <if test="adminname != null and adminname != ''">
+                and adminname = #{adminname}
+            </if>
+            <if test="admintype != null and admintype != ''">
+                and admintype = #{admintype}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="phone != null">
+                and phone = #{phone}
+            </if>
+            <if test="sex != null and sex != ''">
+                and sex = #{sex}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="itemid" useGeneratedKeys="true">
+        insert into cpms.tb_admin(adminid, password, admincode, adminname, admintype, email, phone, sex)
+        values (#{adminid}, #{password}, #{admincode}, #{adminname}, #{admintype}, #{email}, #{phone}, #{sex})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update cpms.tb_admin
+        <set>
+            <if test="adminid != null and adminid != ''">
+                adminid = #{adminid},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="admincode != null and admincode != ''">
+                admincode = #{admincode},
+            </if>
+            <if test="adminname != null and adminname != ''">
+                adminname = #{adminname},
+            </if>
+            <if test="admintype != null and admintype != ''">
+                admintype = #{admintype},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="sex != null and sex != ''">
+                sex = #{sex},
+            </if>
+        </set>
+        where itemid = #{itemid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from cpms.tb_admin where itemid = #{itemid}
+    </delete>
+
+</mapper>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.gllg.isp.cmps.model.dao.TbUptownDao">
+
+    <resultMap id="BaseResultMap" type="com.example.gllg.isp.cmps.model.entity.TbUptown">
+        <!--@Table tb_uptown-->
+        <result property="itemid" column="itemid" jdbcType="INTEGER"/>
+        <result property="itemcode" column="itemcode" jdbcType="VARCHAR"/>
+        <result property="uptowncode" column="uptowncode" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="pro" column="pro" jdbcType="VARCHAR"/>
+        <result property="city" column="city" jdbcType="VARCHAR"/>
+        <result property="distinct" column="distinct" jdbcType="OTHER"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="area" column="area" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          itemid, itemcode, uptowncode, name, pro, city, distinct, phone, area
+        from cpms.tb_uptown
+        where itemid = #{itemid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          itemid, itemcode, uptowncode, name, pro, city, distinct, phone, area
+        from cpms.tb_uptown
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          itemid, itemcode, uptowncode, name, pro, city, distinct, phone, area
+        from cpms.tb_uptown
+        <where>
+            <if test="itemid != null">
+                and itemid = #{itemid}
+            </if>
+            <if test="itemcode != null and itemcode != ''">
+                and itemcode = #{itemcode}
+            </if>
+            <if test="uptowncode != null and uptowncode != ''">
+                and uptowncode = #{uptowncode}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="pro != null and pro != ''">
+                and pro = #{pro}
+            </if>
+            <if test="city != null and city != ''">
+                and city = #{city}
+            </if>
+            <if test="distinct != null">
+                and distinct = #{distinct}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="area != null">
+                and area = #{area}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="itemid" useGeneratedKeys="true">
+        insert into cpms.tb_uptown(uptowncode, name, pro, city, distinct, phone, area)
+        values (#{uptowncode}, #{name}, #{pro}, #{city}, #{distinct}, #{phone}, #{area})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update cpms.tb_uptown
+        <set>
+            <if test="uptowncode != null and uptowncode != ''">
+                uptowncode = #{uptowncode},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="pro != null and pro != ''">
+                pro = #{pro},
+            </if>
+            <if test="city != null and city != ''">
+                city = #{city},
+            </if>
+            <if test="distinct != null">
+                distinct = #{distinct},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="area != null">
+                area = #{area},
+            </if>
+        </set>
+        where itemid = #{itemid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from cpms.tb_uptown where itemid = #{itemid}
+    </delete>
+
+</mapper>
