@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.gllg.isp.cmps.mapper.TbWaterfeeDao">
+
+    <resultMap id="BaseResultMap" type="com.example.gllg.isp.cmps.entity.TbWaterfee">
+        <!--@Table tb_waterfee-->
+        <result property="itemid" column="itemid" jdbcType="INTEGER"/>
+        <result property="itemcode" column="itemcode" jdbcType="VARCHAR"/>
+        <result property="waterfeecode" column="waterfeecode" jdbcType="VARCHAR"/>
+        <result property="lastdegree" column="lastdegree" jdbcType="NUMERIC"/>
+        <result property="currentdegree" column="currentdegree" jdbcType="NUMERIC"/>
+        <result property="lastttime" column="lastttime" jdbcType="OTHER"/>
+        <result property="currenttime" column="currenttime" jdbcType="OTHER"/>
+        <result property="coefficient" column="coefficient" jdbcType="NUMERIC"/>
+        <result property="operater" column="operater" jdbcType="VARCHAR"/>
+        <result property="waterfee" column="waterfee" jdbcType="VARCHAR"/>
+        <result property="introduce" column="introduce" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          itemid, itemcode, waterfeecode, lastdegree, currentdegree, lastttime, currenttime, coefficient, operater, waterfee, introduce, state, type
+        from cpms.tb_waterfee
+        where itemid = #{itemid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          itemid, itemcode, waterfeecode, lastdegree, currentdegree, lastttime, currenttime, coefficient, operater, waterfee, introduce, state, type
+        from cpms.tb_waterfee
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          itemid, itemcode, waterfeecode, lastdegree, currentdegree, lastttime, currenttime, coefficient, operater, waterfee, introduce, state, type
+        from cpms.tb_waterfee
+        <where>
+            <if test="itemid != null">
+                and itemid = #{itemid}
+            </if>
+            <if test="itemcode != null and itemcode != ''">
+                and itemcode = #{itemcode}
+            </if>
+            <if test="waterfeecode != null and waterfeecode != ''">
+                and waterfeecode = #{waterfeecode}
+            </if>
+            <if test="lastdegree != null">
+                and lastdegree = #{lastdegree}
+            </if>
+            <if test="currentdegree != null">
+                and currentdegree = #{currentdegree}
+            </if>
+            <if test="lastttime != null">
+                and lastttime = #{lastttime}
+            </if>
+            <if test="currenttime != null">
+                and currenttime = #{currenttime}
+            </if>
+            <if test="coefficient != null">
+                and coefficient = #{coefficient}
+            </if>
+            <if test="operater != null and operater != ''">
+                and operater = #{operater}
+            </if>
+            <if test="waterfee != null and waterfee != ''">
+                and waterfee = #{waterfee}
+            </if>
+            <if test="introduce != null and introduce != ''">
+                and introduce = #{introduce}
+            </if>
+            <if test="state != null and state != ''">
+                and state = #{state}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="itemid" useGeneratedKeys="true">
+        insert into cpms.tb_waterfee(waterfeecode, lastdegree, currentdegree, lastttime, currenttime, coefficient, operater, waterfee, introduce, state, type)
+        values (#{waterfeecode}, #{lastdegree}, #{currentdegree}, #{lastttime}, #{currenttime}, #{coefficient}, #{operater}, #{waterfee}, #{introduce}, #{state}, #{type})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update cpms.tb_waterfee
+        <set>
+            <if test="waterfeecode != null and waterfeecode != ''">
+                waterfeecode = #{waterfeecode},
+            </if>
+            <if test="lastdegree != null">
+                lastdegree = #{lastdegree},
+            </if>
+            <if test="currentdegree != null">
+                currentdegree = #{currentdegree},
+            </if>
+            <if test="lastttime != null">
+                lastttime = #{lastttime},
+            </if>
+            <if test="currenttime != null">
+                currenttime = #{currenttime},
+            </if>
+            <if test="coefficient != null">
+                coefficient = #{coefficient},
+            </if>
+            <if test="operater != null and operater != ''">
+                operater = #{operater},
+            </if>
+            <if test="waterfee != null and waterfee != ''">
+                waterfee = #{waterfee},
+            </if>
+            <if test="introduce != null and introduce != ''">
+                introduce = #{introduce},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type},
+            </if>
+        </set>
+        where itemid = #{itemid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from cpms.tb_waterfee where itemid = #{itemid}
+    </delete>
+
+</mapper>
