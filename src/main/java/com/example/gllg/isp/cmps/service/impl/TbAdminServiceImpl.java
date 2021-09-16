@@ -1,7 +1,7 @@
 package com.example.gllg.isp.cmps.service.impl;
 
 import com.example.gllg.isp.cmps.entity.TbAdmin;
-import com.example.gllg.isp.cmps.dao.TbAdminDao;
+import com.example.gllg.isp.cmps.mapper.TbAdminDao;
 import com.example.gllg.isp.cmps.service.TbAdminService;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * (TbAdmin)表服务实现类
  *
  * @author makejava
- * @since 2021-09-13 10:59:04
+ * @since 2021-09-14 16:18:50
  */
 @Service("tbAdminService")
 public class TbAdminServiceImpl implements TbAdminService {

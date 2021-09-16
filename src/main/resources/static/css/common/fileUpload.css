@@ -1,0 +1,52 @@
+/*文件上传*/
+.preview-div{
+    width: 200px;
+    height: 200px;
+    border: #a2a8b1 2px solid;
+    border-radius: 10%;
+    overflow: hidden;
+}
+.btn-upload{
+    position: relative;
+    width:200px;
+    height:200px;
+    left: 0px;
+    top: -200px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 200px;
+    background-color: #ffffff;
+    pointer-events: none;
+    color: #c34740;
+}
+.file-upload{
+    width: 200px;
+    height: 200px;
+    opacity: 100%;
+}
+.show-img{
+    position: relative;
+    left: 0px;
+    top: -400px;
+    width: 200px;
+    height: 200px;
+    pointer-events: none;
+    z-index: 101;
+}
+.update-init-img{
+    z-index: 100;
+    position: relative;
+    left: 0px;
+    top: -400px;
+    width: 200px;
+    height: 200px;
+    pointer-events: none;
+}
+.form-init-img{
+    position: relative;
+    top:-200px;
+    width: 200px;
+    height: 200px;
+    pointer-events: none;
+    z-index: 100;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="frame-menu-head">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/component/bootstrap-3.3.7/css/bootstrap.min.css}"
+          href="../../static/component/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/component/inspinia/font-awesome/css/font-awesome.css}"
+          href="../../static/component/inspinia/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link th:href="@{/component/inspinia/css/style.css}"
+          href="../../static/component/inspinia/css/style.css" rel="stylesheet">
+    <link th:href="@{/css/frame/style.css}" rel="stylesheet">
+
+    <!-- Mainly scripts -->
+    <script th:src="@{/component/js/jquery-2.2.4.js}"
+            src="../../static/component/js/jquery-2.2.4.js"></script>
+    <script th:src="@{/component/bootstrap-3.3.7/js/bootstrap.min.js}"
+    src="../../static/component/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script th:src="@{/component/inspinia/js/plugins/metisMenu/jquery.metisMenu.js}"
+    src="../../static/component/inspinia/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <!-- Custom and plugin javascript -->
+    <script th:src="@{/component/inspinia/js/inspinia.js}"
+    src="../../static/component/inspinia/js/inspinia.js"></script>
+
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation" th:fragment="frame-menu(menutab)" >
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="img/profile_small.jpg" />
+                             </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">小区管理系统</strong>
+                             </span> <span class="text-muted text-xs block"> <b class="caret"></b></span> </span> </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="contacts.html">Contacts</a></li>
+                            <li><a href="mailbox.html">Mailbox</a></li>
+                            <li class="divider"></li>
+                            <li><a href="login.html">Logout</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li th:class="${menutab/10 eq 1}?'active':''">
+                    <a href="#" class="menu-item"><span class="nav-label">小区管理</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li th:class="${menutab%10 eq 1}?'active':''"><a href="/tbUptown">我的小区</a></li>
+                        <li th:class="${menutab%10 eq 2}?'active':''"><a href="graph_morris.html">业务受理</a></li>
+                        <li th:class="${menutab%10 eq 3}?'active':''"><a href="graph_rickshaw.html">房屋装修</a></li>
+                    </ul>
+                </li>
+                <li th:class="${menutab/10 eq 2}?'active':''">
+                    <a href="#" class="menu-item"><span class="nav-label">业主管理</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li th:class="${menutab%10 eq 1}?'active':''"><a href="/SignalSourceManagement">业主信息</a></li>
+                        <li th:class="${menutab%10 eq 2}?'active':''"><a href="/ServiceTeam">业主成员</a></li>
+                        <li th:class="${menutab%10 eq 4}?'active':''"><a href="/Feature">业主账号</a></li>
+                    </ul>
+                </li>
+                <li th:class="${menutab/10 eq 3}?'active':''">
+                    <a href="#" class="menu-item"><span class="nav-label">费用管理</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li th:class="${menutab%10 eq 1}?'active':''"><a href="/SignalSourceManagement">水电收费</a></li>
+                        <li th:class="${menutab%10 eq 2}?'active':''"><a href="/ServiceTeam">房屋收费</a></li>
+                        <li th:class="${menutab%10 eq 3}?'active':''"><a href="/DevelopingProject">物业收费</a></li>
+                        <li th:class="${menutab%10 eq 4}?'active':''"><a href="/Feature">车辆收费</a></li>
+                    </ul>
+                </li>
+                <li th:class="${menutab/10 eq 4}?'active':''">
+                    <a href="#" class="menu-item"><span class="nav-label">智慧停车</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li th:class="${menutab%10 eq 1}?'active':''"><a href="/SignalSourceManagement">停车场管理</a></li>
+                        <li th:class="${menutab%10 eq 2}?'active':''"><a href="/ServiceTeam">车位信息</a></li>
+                        <li th:class="${menutab%10 eq 3}?'active':''"><a href="/DevelopingProject">业主车辆</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="page-wrapper" class="gray-bg" style="min-height: 275px;">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top white-bg frame-head" role="navigation" style="margin-bottom: 0">
+                <ul class="nav navbar-top-links navbar-right">
+                    <li><span class="m-r-sm text-muted welcome-message">“智慧”国医堂惠民信息系统</span></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="wrapper wrapper-content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+
+                    </div>
+                </div>
+                <!--<div class="col-lg-2">-->
+                    <!--<div class="ibox float-e-margins">-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+</script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: springboot-cpms
+    name: springboot-cmps
   thymeleaf:
     # prefix: classpath:/templates # 默认 thymeleaf 模板页面所在位置
     cache: false
@@ -15,7 +15,7 @@ spring:
       cache: false  #页面不加载缓存，修改即时生效
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://rm-wz9a0o4h4m52r2k299o.mysql.rds.aliyuncs.com/natmeha?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useAffectedRows=true&zeroDateTimeBehavior=convertToNull&useOldAliasMetadataBehavior=true
+    url: jdbc:mysql://rm-wz9a0o4h4m52r2k299o.mysql.rds.aliyuncs.com/cpms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useAffectedRows=true&zeroDateTimeBehavior=convertToNull&useOldAliasMetadataBehavior=true
     username: root
     password: Root123456
     type: com.zaxxer.hikari.HikariDataSource
@@ -29,7 +29,7 @@ spring:
       connection-timeout: 30000
       connection-test-query: SELECT 1
 
-#文件上传下载配置
+  #文件上传下载配置
   servlet:
     multipart:
       max-file-size: 1024MB
@@ -74,5 +74,5 @@ logging:
     console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
   # \u65E5\u5FD7\u6587\u4EF6
   file:
-    name: hebeitcm.log
+    name: cmps.log
 #    path: #日志文件存入的目录

@@ -1,0 +1,65 @@
+*{
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+}
+body{
+    background-color: white;
+}
+#wrapper{
+    height: 1200px
+}
+.frame-head{
+    background-color: rgba(119, 86, 55, 1);
+    height: 120px;
+}
+.welcome-message{
+    color: white;
+    font-size: 20px;
+    line-height: 120px;
+}
+.nav-header{
+    background-color: rgba(119, 86, 55, 1);
+    height: 120px;
+}
+/*大菜单标题*/
+.menu-item{
+    background-color: white;
+}
+.menu-item>span{
+    color: black;
+}
+/*大菜单*/
+.metismenu>li{
+    border-color: rgba(119, 86, 55, 1);
+}
+.metismenu > li.active {
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    border-color:rgba(214, 0, 0, 1);
+}
+/*小菜单标题*/
+.nav > li.active > a {
+    color:rgba(214, 0, 0, 1);
+}
+.navbar-default .nav > li > a:hover{
+    background: rgba(237, 246, 255, 0.65);
+    color: rgba(27, 27, 27, 0.647058823529412);
+}
+.navbar-default .nav > .active > a:hover{
+    background: rgba(255, 255, 255, 0.65);
+    color: rgba(214, 0, 0, 1);
+}
+.navbar-default .nav > li > a:focus {
+    background-color: #ffffff;
+    color: white;
+}
+.nav-second-level> li > a{
+    color: rgba(27, 27, 27, 0.647058823529412);
+    background-color: #f3f3f4;
+}
+.nav-second-level.active>a{
+    color: red;
+}
+

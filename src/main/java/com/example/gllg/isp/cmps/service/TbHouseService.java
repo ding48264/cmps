@@ -1,17 +1,18 @@
 package com.example.gllg.isp.cmps.service;
-import com.example.gllg.isp.cmps.entity.TbAdmin;
+
+import com.example.gllg.isp.cmps.entity.TbHouse;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
- * (TbAdmin)表服务接口
+ * (TbHouse)表服务接口
  *
  * @author makejava
  * @since 2021-09-14 16:18:50
  */
 @Mapper
-public interface TbAdminService {
+public interface TbHouseService {
 
     /**
      * 通过ID查询单条数据
@@ -19,7 +20,7 @@ public interface TbAdminService {
      * @param itemid 主键
      * @return 实例对象
      */
-    TbAdmin queryById(Integer itemid);
+    TbHouse queryById(Integer itemid);
 
     /**
      * 查询多条数据
@@ -28,23 +29,23 @@ public interface TbAdminService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<TbAdmin> queryAllByLimit(int offset, int limit);
+    List<TbHouse> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param tbAdmin 实例对象
+     * @param tbHouse 实例对象
      * @return 实例对象
      */
-    TbAdmin insert(TbAdmin tbAdmin);
+    TbHouse insert(TbHouse tbHouse);
 
     /**
      * 修改数据
      *
-     * @param tbAdmin 实例对象
+     * @param tbHouse 实例对象
      * @return 实例对象
      */
-    TbAdmin update(TbAdmin tbAdmin);
+    TbHouse update(TbHouse tbHouse);
 
     /**
      * 通过主键删除数据
