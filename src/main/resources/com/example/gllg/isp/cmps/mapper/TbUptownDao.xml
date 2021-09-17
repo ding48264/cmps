@@ -3,14 +3,14 @@
 <mapper namespace="com.example.gllg.isp.cmps.mapper.TbUptownDao">
 
     <resultMap id="BaseResultMap" type="com.example.gllg.isp.cmps.entity.TbUptown">
-        <!--@Table tb_uptown-->
         <result property="itemid" column="itemid" jdbcType="INTEGER"/>
         <result property="itemcode" column="itemcode" jdbcType="VARCHAR"/>
         <result property="uptowncode" column="uptowncode" jdbcType="VARCHAR"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="pro" column="pro" jdbcType="VARCHAR"/>
         <result property="city" column="city" jdbcType="VARCHAR"/>
-        <result property="distinct" column="distinct" jdbcType="OTHER"/>
+        <result property="distinct" column="distinct" jdbcType="VARCHAR"/>
+        <result property="addr" column="addr" jdbcType="VARCHAR"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="area" column="area" jdbcType="INTEGER"/>
     </resultMap>
@@ -22,13 +22,14 @@
         pro,
         city,
         distinct,
+        addr,
         phone,
         area
     </sql>
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          itemid, itemcode, uptowncode, name, pro, city, distinct, phone, area
+          *
         from cpms.tb_uptown
         where itemid = #{itemid}
     </select>
@@ -36,7 +37,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          itemid, itemcode, uptowncode, name, pro, city, distinct, phone, area
+          *
         from cpms.tb_uptown
         limit #{offset}, #{limit}
     </select>
@@ -68,6 +69,9 @@
             <if test="distinct != null">
                 and distinct = #{distinct}
             </if>
+             <if test="addr != null">
+            and addr = #{addr}
+        </if>
             <if test="phone != null and phone != ''">
                 and phone = #{phone}
             </if>
@@ -79,8 +83,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="itemid" useGeneratedKeys="true">
-        insert into cpms.tb_uptown(uptowncode, name, pro, city, distinct, phone, area)
-        values (#{uptowncode}, #{name}, #{pro}, #{city}, #{distinct}, #{phone}, #{area})
+        insert into cpms.tb_uptown(uptowncode, name, pro, city, distinct,addr phone, area)
+        values (#{uptowncode}, #{name}, #{pro}, #{city}, #{distinct},#{addr}, #{phone}, #{area})
     </insert>
 
     <!--通过主键修改数据-->
@@ -102,6 +106,9 @@
             <if test="distinct != null">
                 distinct = #{distinct},
             </if>
+            <if test="addr != null">
+                addr = #{addr},
+        </if>
             <if test="phone != null and phone != ''">
                 phone = #{phone},
             </if>

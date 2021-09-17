@@ -29,9 +29,13 @@ public class TbUptown implements Serializable {
     */
     private String city;
     /**
-    * 县
-    */
+     * 县
+     */
     private String distinct;
+    /**
+     * 地址
+     */
+    private String addr;
     /**
     * 电话
     */
@@ -98,10 +102,15 @@ public class TbUptown implements Serializable {
         this.distinct = distinct;
     }
 
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
+    public String getAddr() {
+        return addr;
+    }
     public String getPhone() {
         return phone;
     }
-
     public void setPhone(String phone) {
         this.phone = phone;
     }

@@ -2,7 +2,10 @@ package com.example.gllg.isp.cmps.controller;
 
 import com.example.gllg.isp.cmps.entity.TbUptown;
 import com.example.gllg.isp.cmps.service.TbUptownService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,6 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("tbUptown")
+@Slf4j
 public class TbUptownController {
     /**
      * 服务对象
@@ -42,5 +46,18 @@ public class TbUptownController {
         modelAndView.addObject("tbUptowns",tbUptowns);
         modelAndView.setViewName("uptown/Uptown");
         return modelAndView;
+    }
+    //异步更新
+    @GetMapping("/async/update/{itemid}")
+    public ModelAndView  selectByAsync(Model model,
+                                 ModelAndView modelAndView,
+                                @PathVariable Integer itemid){
+        final TbUptown tbUptown=this.tbUptownService.queryById(itemid);
+        model.addAttribute("tbUptown",tbUptown);
+        modelAndView.addObject("tbUptown",tbUptown);
+        modelAndView.setViewName("uptown/Uptown");
+        modelAndView.setViewName("uptown/update-content");
+        return modelAndView;
+//        return "uptown/update-content";
     }
 }

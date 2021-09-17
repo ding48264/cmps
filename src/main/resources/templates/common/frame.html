@@ -38,19 +38,19 @@
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">小区管理系统</strong>
                              </span> <span class="text-muted text-xs block"> <b class="caret"></b></span> </span> </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">Profile</a></li>
-                            <li><a href="contacts.html">Contacts</a></li>
-                            <li><a href="mailbox.html">Mailbox</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
-                        </ul>
+                        <!--<ul class="dropdown-menu animated fadeInRight m-t-xs">-->
+                            <!--<li><a href="profile.html">Profile</a></li>-->
+                            <!--<li><a href="contacts.html">Contacts</a></li>-->
+                            <!--<li><a href="mailbox.html">Mailbox</a></li>-->
+                            <!--<li class="divider"></li>-->
+                            <!--<li><a href="login.html">Logout</a></li>-->
+                        <!--</ul>-->
                     </div>
                 </li>
                 <li th:class="${menutab/10 eq 1}?'active':''">
                     <a href="#" class="menu-item"><span class="nav-label">小区管理</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li th:class="${menutab%10 eq 1}?'active':''"><a href="/tbUptown">我的小区</a></li>
+                        <li th:class="${menutab%10 eq 1}?'active':''"><a href="d/tbUptown">我的小区</a></li>
                         <li th:class="${menutab%10 eq 2}?'active':''"><a href="graph_morris.html">业务受理</a></li>
                         <li th:class="${menutab%10 eq 3}?'active':''"><a href="graph_rickshaw.html">房屋装修</a></li>
                     </ul>
@@ -87,7 +87,7 @@
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top white-bg frame-head" role="navigation" style="margin-bottom: 0">
                 <ul class="nav navbar-top-links navbar-right">
-                    <li><span class="m-r-sm text-muted welcome-message">“智慧”国医堂惠民信息系统</span></li>
+                    <li><span class="m-r-sm text-muted welcome-message">“智慧”小区物业系统</span></li>
                 </ul>
             </nav>
         </div>

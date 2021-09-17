@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <form id="addForm" action="/tbUptown" class="form-horizontal" method="post" th:object="${tbUptown}">
+            <div class="form-group">
+                <label for="inputname" class="col-sm-2 control-label">小区名称</label>
+                <div class="col-sm-10">
+                    <input type="text" name="name" th:value="*{name}" class="form-control" id="inputname" placeholder="请输入小区名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputpro" class="col-sm-2 control-label">小区所在省</label>
+                <div class="col-sm-10">
+                    <input type="text" name="pro" th:value="*{pro}" class="form-control" id="inputpro" placeholder="请输入小区所在省份">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputcity" class="col-sm-2 control-label">小区所在市</label>
+                <div class="col-sm-10">
+                    <input type="text" name="city" th:value="*{city}" class="form-control" id="inputcity" placeholder="请输入小区城市">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputdistinct" class="col-sm-2 control-label">小区所在区</label>
+                <div class="col-sm-10">
+                    <input type="text" name="distinct" th:value="*{distinct}" class="form-control" id="inputdistinct" placeholder="请输入小区所在区">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddr" class="col-sm-2 control-label">小区地址</label>
+                <div class="col-sm-10">
+                    <input type="text" name="addr" th:value="*{addr}" class="form-control" id="inputAddr" placeholder="请输入小区详细地址">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputphone" class="col-sm-2 control-label">联系方式</label>
+                <div class="col-sm-10">
+                    <input type="text" name="phone" th:value="*{phone}" class="form-control" id="inputphone" placeholder="请输入小区联系方式">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputarea" class="col-sm-2 control-label">小区面积</label>
+                <div class="col-sm-10">
+                    <input type="text" name="area" th:value="*{area}" class="form-control" id="inputarea" placeholder="请输入小区面积">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <button id="loginBtn" type="submit" class="btn btn-primary">保存</button>
+                    <button type="reset" class="btn btn-default" style="margin-left: 20px;">重置</button>
+                    <button type="reset" class="btn btn-default" style="margin-left: 20px;" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
