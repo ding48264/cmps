@@ -72,14 +72,14 @@
                                 <tr th:each="uptown,status : ${tbUptowns}">
                                     <td th:text="${uptown.pro}"></td>
                                     <td th:text="${uptown.city}"></td>
-                                    <td th:text="${uptown.distinct}"></td>
+                                    <td th:text="${uptown.district}"></td>
                                     <td th:text="${uptown.name}"></td>
                                     <td th:text="${uptown.uptowncode}"></td>
                                     <td th:text="${uptown.phone}"></td>
                                     <td th:text="${uptown.area}"></td>
                                     <td>
                                         <a href="#modal-container-update" role="button" class="btn"
-                                           data-toggle="modal" data-backdrop="static" th:attr="up-no=${uptown.itemid}">异步更新</a>
+                                           data-toggle="modal" data-backdrop="static" th:attr="up-no=${uptown.itemid}">更新</a>
                                         <button id="deleteuptown" onclick="delectuptown(this)" th:value="${uptown.itemid}">删除</button>
                                     </td>
                                 </tr>
@@ -114,9 +114,9 @@
                 <button type="button" class="btn btn-primary">保存</button>
             </div>-->
         </div>
-
     </div>
 </div>
+
 
 
 
@@ -132,7 +132,7 @@
             closeOnConfirm: false
         }, function () {
             var itemid = $(obj).val();
-            $.post("/Uptown/delete",{"itemid":itemid},function (resp) {
+            $.post("/tbUptown/delete",{"itemid":itemid},function (resp) {
                 console.log(resp);
                 if (resp[0].status == "success"){
                     swal({
@@ -140,7 +140,6 @@
                         text: "删除成功!",
                         type: "success"
                     }, function () {
-                        var currentPageNum = $('#pageNum').val();
                     });
                 } else {
                     swal({

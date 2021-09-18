@@ -2,10 +2,26 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+<head>
 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的小区</title>
+    <link th:href="@{/component/bootstrap-3.3.7/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/service-team/style.css}" rel="stylesheet">
+    <link th:href="@{/component/inspinia/css/plugins/sweetalert/sweetalert.css}" rel="stylesheet">
+
+    <script th:src="@{/component/js/jquery-2.2.4.js}"></script>
+    <script th:src="@{/component/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
+    <script th:src="@{/component/inspinia/js/plugins/sweetalert/sweetalert.min.js}"></script>
+    <head th:replace="common/frame::frame-menu-head"></head>
+
+</head>
+<body>
 <div class="row clearfix">
     <div class="col-md-12 column">
-        <form id="addForm" action="/tbUptown" class="form-horizontal" method="post" th:object="${tbUptown}">
+        <form id="updateForm"  class="form-horizontal"  th:object="${tbUptown}">
+            <input type="hidden" name="itemid" th:value="*{itemid}">
             <div class="form-group">
                 <label for="inputname" class="col-sm-2 control-label">小区名称</label>
                 <div class="col-sm-10">
@@ -13,21 +29,21 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputpro" class="col-sm-2 control-label">小区所在省</label>
+                <label for="inputpro" class="col-sm-2 control-label">小区省份</label>
                 <div class="col-sm-10">
                     <input type="text" name="pro" th:value="*{pro}" class="form-control" id="inputpro" placeholder="请输入小区所在省份">
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputcity" class="col-sm-2 control-label">小区所在市</label>
+                <label for="inputcity" class="col-sm-2 control-label">小区市区</label>
                 <div class="col-sm-10">
                     <input type="text" name="city" th:value="*{city}" class="form-control" id="inputcity" placeholder="请输入小区城市">
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputdistinct" class="col-sm-2 control-label">小区所在区</label>
+                <label for="inputdistrict" class="col-sm-2 control-label">小区区县</label>
                 <div class="col-sm-10">
-                    <input type="text" name="distinct" th:value="*{distinct}" class="form-control" id="inputdistinct" placeholder="请输入小区所在区">
+                    <input type="text" name="district" th:value="*{district}" class="form-control" id="inputdistrict" placeholder="请输入小区所在区">
                 </div>
             </div>
             <div class="form-group">
@@ -50,7 +66,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-4 col-sm-8">
-                    <button id="loginBtn" type="submit" class="btn btn-primary">保存</button>
+                    <div id="submitBtn"  class="btn btn-primary">保存</div>
                     <button type="reset" class="btn btn-default" style="margin-left: 20px;">重置</button>
                     <button type="reset" class="btn btn-default" style="margin-left: 20px;" data-dismiss="modal">关闭</button>
                 </div>
@@ -58,4 +74,63 @@
         </form>
     </div>
 </div>
-
+<script>
+    $('#submitBtn').click(function () {
+        swal({
+            title: "确认更新？",
+            text: "此操作将不可撤销",
+            showCancelButton: true,
+            confirmButtonColor: "#2188dd",
+            confirmButtonText: "确认",
+            closeOnConfirm: false,
+            cancelButtonText:"取消"
+        }, function () {
+            // var uploadFile = $('#uploadFile');
+            var form = document.getElementById('updateForm');
+            var formData = new FormData(form);
+            // formData.append('uploadFile',uploadFile);
+            $.ajax({
+                url: "/tbUptown/doUpdateUptown",
+                type: "POST",
+                data: formData,
+                dataType : "json",
+                /**
+                 *必须false才会自动加上正确的Content-Type
+                 */
+                contentType: false,
+                /**
+                 * 必须false才会避开jQuery对 formdata 的默认处理
+                 * XMLHttpRequest会对 formdata 进行正确的处理
+                 */
+                processData: false,
+                success: function (data) {
+                    if (data[0].status == "success") {
+                        swal({
+                            title: "已更新",
+                            text: "",
+                            type:"success",
+                            confirmButtonText: "确认",
+                        }, function () {
+                            window.location.reload();
+                        })
+                    }
+                    if (data[0].status == "failed") {
+                        swal({
+                            title: "没有需要更新的信息",
+                            text: "请修改需要更新的内容",
+                            type:"warning",
+                            confirmButtonText: "确认",
+                        }, function () {
+                            window.location.reload();
+                        })
+                    }
+                },
+                error: function () {
+                    alert("更新失败！");
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>
