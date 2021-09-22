@@ -122,4 +122,11 @@
         where state=0
         limit 1
     </select>
+    <select id="selectByone" resultMap="BaseResultMap">
+        select * from tb_house
+        where itemcode=#{uptowncode}
+        and building=#{building}
+        and unit=#{unit}
+        and room=#{room}
+    </select>
 </mapper>

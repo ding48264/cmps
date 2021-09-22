@@ -1,5 +1,7 @@
 package com.example.gllg.isp.cmps.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2021-09-14 16:18:50
  */
+@Data
 public class TbWaterfee implements Serializable {
     private static final long serialVersionUID = -84341293179652484L;
     
@@ -58,6 +61,7 @@ public class TbWaterfee implements Serializable {
     * 类型
     */
     private String type;
+    private TbHouse tbHouse;
 
 
     public Integer getItemid() {

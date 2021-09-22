@@ -81,4 +81,9 @@ public class TbUptownServiceImpl implements TbUptownService {
     public List<TbUptown> queryAllUptown() {
         return this.tbUptownDao.queryAllUptown();
     }
+
+    @Override
+    public TbUptown selectByName(String uptownName) {
+        return  this.tbUptownDao.selectByName(uptownName);
+    }
 }

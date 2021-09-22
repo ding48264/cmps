@@ -127,4 +127,8 @@
         select *
         from tb_uptown
     </select>
+    <select id="selectByName" resultMap="BaseResultMap">
+        select * from tb_uptown
+        where name=#{uptownName}
+    </select>
 </mapper>

@@ -18,7 +18,32 @@
         <result property="state" column="state" jdbcType="VARCHAR"/>
         <result property="type" column="type" jdbcType="VARCHAR"/>
     </resultMap>
-
+<resultMap id="associateHouse" type="com.example.gllg.isp.cmps.entity.TbWaterfee">
+    <result property="itemid" column="itemid" jdbcType="INTEGER"/>
+    <result property="itemcode" column="itemcode" jdbcType="VARCHAR"/>
+    <result property="waterfeecode" column="waterfeecode" jdbcType="VARCHAR"/>
+    <result property="lastdegree" column="lastdegree" jdbcType="NUMERIC"/>
+    <result property="currentdegree" column="currentdegree" jdbcType="NUMERIC"/>
+    <result property="lastttime" column="lastttime" jdbcType="OTHER"/>
+    <result property="currenttime" column="currenttime" jdbcType="OTHER"/>
+    <result property="coefficient" column="coefficient" jdbcType="NUMERIC"/>
+    <result property="operater" column="operater" jdbcType="VARCHAR"/>
+    <result property="waterfee" column="waterfee" jdbcType="VARCHAR"/>
+    <result property="introduce" column="introduce" jdbcType="VARCHAR"/>
+    <result property="state" column="state" jdbcType="VARCHAR"/>
+    <result property="type" column="type" jdbcType="VARCHAR"/>
+    <association property="tbHouse" javaType="com.example.gllg.isp.cmps.entity.TbHouse">
+        <result property="itemcode" column="itemcode" jdbcType="VARCHAR"/>
+        <result property="housecode" column="housecode" jdbcType="VARCHAR"/>
+        <result property="building" column="building" jdbcType="VARCHAR"/>
+        <result property="unit" column="unit" jdbcType="VARCHAR"/>
+        <result property="room" column="room" jdbcType="VARCHAR"/>
+        <result property="holdcode" column="holdcode" jdbcType="VARCHAR"/>
+        <result property="area" column="area" jdbcType="INTEGER"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="VARCHAR"/>
+    </association>
+</resultMap>
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
@@ -82,11 +107,15 @@
             </if>
         </where>
     </select>
+    <select id="queryAllWaterFee" resultMap="BaseResultMap">
+        select * from
+        tb_waterfee
+            </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="itemid" useGeneratedKeys="true">
-        insert into cpms.tb_waterfee(waterfeecode, lastdegree, currentdegree, lastttime, currenttime, coefficient, operater, waterfee, introduce, state, type)
-        values (#{waterfeecode}, #{lastdegree}, #{currentdegree}, #{lastttime}, #{currenttime}, #{coefficient}, #{operater}, #{waterfee}, #{introduce}, #{state}, #{type})
+        insert into cpms.tb_waterfee(itemcode,waterfeecode, lastdegree, currentdegree, lastttime, currenttime, coefficient, operater, waterfee, introduce, state, type)
+        values (#{itemcode},#{waterfeecode}, #{lastdegree}, #{currentdegree}, #{lastttime}, #{currenttime}, #{coefficient}, #{operater}, #{waterfee}, #{introduce}, #{state}, #{type})
     </insert>
 
     <!--通过主键修改数据-->

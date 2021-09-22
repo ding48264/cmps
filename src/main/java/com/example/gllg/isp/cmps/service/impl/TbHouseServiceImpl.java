@@ -85,4 +85,9 @@ public class TbHouseServiceImpl implements TbHouseService {
     public TbHouse selectUse() {
         return this.tbHouseDao.selectHouse();
     }
+
+    @Override
+    public TbHouse selectByone(String uptowncode, String building, String unit, String room) {
+        return this.tbHouseDao.selectByone( uptowncode,  building,  unit,  room);
+    }
 }

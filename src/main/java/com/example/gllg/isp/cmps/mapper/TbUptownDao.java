@@ -67,4 +67,5 @@ public interface TbUptownDao {
 
     List<TbUptown> queryAllUptown();
 
+    TbUptown selectByName(@Param("uptownName") String uptownName);
 }

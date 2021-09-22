@@ -76,4 +76,9 @@ public class TbWaterfeeServiceImpl implements TbWaterfeeService {
     public boolean deleteById(Integer itemid) {
         return this.tbWaterfeeDao.deleteById(itemid) > 0;
     }
+
+    @Override
+    public List<TbWaterfee> queryAllWaterFee(Integer pageNum,Integer pageSize) {
+        return this.tbWaterfeeDao.queryAllWaterFee(pageNum,pageSize);
+    }
 }

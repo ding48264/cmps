@@ -56,4 +56,6 @@ public interface TbUptownService {
     boolean deleteById(Integer itemid);
 
     List<TbUptown> queryAllUptown();
+
+    TbUptown selectByName(String uptownName);
 }

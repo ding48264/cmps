@@ -65,4 +65,6 @@ public interface TbWaterfeeDao {
      */
     int deleteById(Integer itemid);
 
+    List<TbWaterfee> queryAllWaterFee(@Param("pageNum") Integer pageNum,
+                                      @Param("pageSize") Integer pageSize);
 }

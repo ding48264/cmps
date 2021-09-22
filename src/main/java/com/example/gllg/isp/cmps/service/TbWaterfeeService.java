@@ -55,4 +55,5 @@ public interface TbWaterfeeService {
      */
     boolean deleteById(Integer itemid);
 
+    List<TbWaterfee> queryAllWaterFee(Integer pageNum,Integer pageSize);
 }

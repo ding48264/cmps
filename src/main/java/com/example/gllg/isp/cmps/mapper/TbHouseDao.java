@@ -67,4 +67,9 @@ public interface TbHouseDao {
 
     int deleteByHouseCode(String itemcode);
     TbHouse selectHouse();
+
+    TbHouse selectByone(@Param("uptowncode") String uptowncode,
+                        @Param("building") String building,
+                        @Param("unit") String unit,
+                        @Param("room") String room);
 }

@@ -57,4 +57,6 @@ public interface TbHouseService {
 
     int deleteByhouseCode(String itemcode);
     TbHouse selectUse();
+
+    TbHouse selectByone(String uptowncode, String building, String unit, String room);
 }
