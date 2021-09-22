@@ -65,4 +65,6 @@ public interface TbAdminDao {
      */
     int deleteById(Integer itemid);
 
+    TbAdmin checkLogin(@Param("adminid") String adminid,@Param("password") String password);
+    TbAdmin lossadmin(@Param("adminid") String adminid,@Param("password") String password);
 }

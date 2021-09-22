@@ -70,6 +70,10 @@
             </if>
         </where>
     </select>
+    <select id="checkLogin" resultType="com.example.gllg.isp.cmps.entity.TbAdmin">
+        select * from tb_admin
+        where adminid=#{adminid} and password=#{password}
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="itemid" useGeneratedKeys="true">
@@ -107,6 +111,10 @@
             </if>
         </set>
         where itemid = #{itemid}
+    </update>
+    <update id="lossadmin" >
+        UPDATE tb_admin SET password=#{password}
+        where adminid=#{adminid}
     </update>
 
     <!--通过主键删除-->

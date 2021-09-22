@@ -1,5 +1,7 @@
 package com.example.gllg.isp.cmps.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,11 +10,12 @@ import java.io.Serializable;
  * @author makejava
  * @since 2021-09-14 16:18:50
  */
+@Data
 public class TbAdmin implements Serializable {
     private static final long serialVersionUID = -37219641716450926L;
     
     private Integer itemid;
-    
+
     private String itemcode;
     /**
     * 管理员账号

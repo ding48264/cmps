@@ -76,4 +76,14 @@ public class TbAdminServiceImpl implements TbAdminService {
     public boolean deleteById(Integer itemid) {
         return this.tbAdminDao.deleteById(itemid) > 0;
     }
+
+    @Override
+    public TbAdmin ckeckLogin(String adminid, String password) {
+        return this.tbAdminDao.checkLogin(adminid,password);
+    }
+
+    @Override
+    public TbAdmin lossAdmin(String adminid, String password) {
+        return this.tbAdminDao.lossadmin(adminid,password);
+    }
 }

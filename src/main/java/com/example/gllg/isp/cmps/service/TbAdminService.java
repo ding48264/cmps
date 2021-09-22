@@ -54,4 +54,7 @@ public interface TbAdminService {
      */
     boolean deleteById(Integer itemid);
 
+    TbAdmin ckeckLogin(String adminid, String password);
+
+    TbAdmin lossAdmin(String adminid, String password);
 }

@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
     <meta charset="UTF-8">
     <title>小区物业管理登录界面</title>
     <style>
         html {
-            background:url(../../static/image/loginbackground.jpeg) no-repeat center fixed;
             background-size:100% 100%;
         }
-
+        .background{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        img{
+            background-size: cover;
+            width: 100%;
+        }
         .wrapper {
             margin: 140px 0 140px auto;
             text-align: center;
@@ -117,9 +127,12 @@
     </style>
 </head>
 <body>
+<div class="background">
+    <img th:src="@{image/loginbackground.jpeg}" width="100%" height="100%">
+</div>
 <div class="wrapper">
     <form action="" method="post" name="login">
-        <img src="../../static/image/logologin.jpeg" class="loginLogo">
+        <img th:src="@{image/logologin.jpeg}" class="loginLogo">
         <p></p>
         <p></p>
         <div class="loginBox">
@@ -127,15 +140,15 @@
             <div class="loginBoxCenter">
                 <p><label for="admin">用户名：</label></p>
 
-                <p><input type="text" id="admin" name="admin" class="loginInput" autofocus="autofocus" required="required" autocomplete="off" placeholder="请输入账号" value="" /></p>
+                <p><input type="text" id="admin" name="adminid" class="loginInput" autofocus="autofocus" required="required" autocomplete="off" placeholder="请输入账号" value="" /></p>
                 <p><label for="apassword">密码：</label></p>
-                <p><input type="password" id="apassword" name="apassword" class="loginInput" required="required" placeholder="请输入密码" value="" /></p>
-                <p><a class="forgetLink" href="../lostpass/cjf2.jsp">忘记密码?</a></p>
+                <p><input type="password" id="apassword" name="password" class="loginInput" required="required" placeholder="请输入密码" value="" /></p>
+                <p><a class="forgetLink" href="/tbAdmin/losspassword">忘记密码?</a></p>
                 <input id="remember" type="checkbox" name="remember" />
                 <label for="remember">记住登录状态</label>
             </div>
             <div class="loginBoxButtons">
-                <button class="loginBtn" onclick="login.action='teacheck.jsp';login.submit();">登   录</button>
+                <button class="loginBtn" onclick="login.action='/tbAdmin/tbUptown';login.submit();">登   录</button>
             </div>
 
         </div>
