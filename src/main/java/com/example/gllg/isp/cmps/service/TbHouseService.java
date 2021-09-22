@@ -55,4 +55,6 @@ public interface TbHouseService {
      */
     boolean deleteById(Integer itemid);
 
+    int deleteByhouseCode(String itemcode);
+    TbHouse selectUse();
 }

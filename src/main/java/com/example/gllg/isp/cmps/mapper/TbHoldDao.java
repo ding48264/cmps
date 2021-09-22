@@ -1,6 +1,8 @@
 package com.example.gllg.isp.cmps.mapper;
 
 import com.example.gllg.isp.cmps.entity.TbHold;
+import com.example.gllg.isp.cmps.entity.TbHouse;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -65,4 +67,18 @@ public interface TbHoldDao {
      */
     int deleteById(Integer itemid);
 
+    List<TbHold> queryAllHold(@Param("tbHold") TbHold tbHold,
+                                @Param("pageNum") Integer pageNum,
+                              @Param("pageSize") Integer pageSize);
+
+
+    Page<TbHold> queryAlls(@Param("tbHold") TbHold tbHold,
+                           @Param("pageNum") Integer pageNum,
+                           @Param("pageSize") Integer pageSize);
+
+    List<TbHold> queryMeb(@Param("holdcode") String holdcode);
+
+    List<TbHold> queryAllHoldOwn(@Param("tbHold") TbHold tbHold,
+                                 @Param("pageNum") Integer pageNum,
+                                 @Param("pageSize") Integer pageSize);
 }

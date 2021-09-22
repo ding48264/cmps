@@ -65,4 +65,6 @@ public interface TbHouseDao {
      */
     int deleteById(Integer itemid);
 
+    int deleteByHouseCode(String itemcode);
+    TbHouse selectHouse();
 }

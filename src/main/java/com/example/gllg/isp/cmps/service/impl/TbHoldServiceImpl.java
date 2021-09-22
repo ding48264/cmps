@@ -1,8 +1,10 @@
 package com.example.gllg.isp.cmps.service.impl;
 
 import com.example.gllg.isp.cmps.entity.TbHold;
+import com.example.gllg.isp.cmps.entity.TbHouse;
 import com.example.gllg.isp.cmps.mapper.TbHoldDao;
 import com.example.gllg.isp.cmps.service.TbHoldService;
+import com.github.pagehelper.Page;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -76,4 +78,28 @@ public class TbHoldServiceImpl implements TbHoldService {
     public boolean deleteById(Integer itemid) {
         return this.tbHoldDao.deleteById(itemid) > 0;
     }
+
+    @Override
+    public List<TbHold> queryAllHold(TbHold tbHold,
+                                    Integer pageNum,
+                                     Integer pageSize) {
+        return this.tbHoldDao.queryAllHold(tbHold,pageNum,pageSize);
+    }
+
+    @Override
+    public Page<TbHold> queryAllHolds(TbHold tbHold, Integer pageNum, Integer pageSize) {
+        return this.tbHoldDao.queryAlls(tbHold,pageNum,pageSize);
+    }
+
+    @Override
+    public List<TbHold> queryMeb(String holdcode) {
+        return this.tbHoldDao.queryMeb(holdcode);
+    }
+
+    @Override
+    public List<TbHold> queryAllHoldOwn(TbHold tbHold, Integer pageNum, Integer pageSize) {
+        return this.tbHoldDao.queryAllHoldOwn(tbHold,pageNum,pageSize);
+    }
+
+
 }

@@ -32,9 +32,7 @@
         <div class="sidebar-collapse">
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
-                    <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="img/profile_small.jpg" />
-                             </span>
+                    <div class="dropdown profile-element">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">小区管理系统</strong>
                              </span> <span class="text-muted text-xs block"> <b class="caret"></b></span> </span> </a>
@@ -50,7 +48,7 @@
                 <li th:class="${menutab/10 eq 1}?'active':''">
                     <a href="#" class="menu-item"><span class="nav-label">小区管理</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li th:class="${menutab%10 eq 1}?'active':''"><a href="d/tbUptown">我的小区</a></li>
+                        <li th:class="${menutab%10 eq 1}?'active':''"><a href="/tbUptown">我的小区</a></li>
                         <li th:class="${menutab%10 eq 2}?'active':''"><a href="graph_morris.html">业务受理</a></li>
                         <li th:class="${menutab%10 eq 3}?'active':''"><a href="graph_rickshaw.html">房屋装修</a></li>
                     </ul>
@@ -58,8 +56,8 @@
                 <li th:class="${menutab/10 eq 2}?'active':''">
                     <a href="#" class="menu-item"><span class="nav-label">业主管理</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li th:class="${menutab%10 eq 1}?'active':''"><a href="/SignalSourceManagement">业主信息</a></li>
-                        <li th:class="${menutab%10 eq 2}?'active':''"><a href="/ServiceTeam">业主成员</a></li>
+                        <li th:class="${menutab%10 eq 1}?'active':''"><a href="/tbHold">业主信息</a></li>
+                        <li th:class="${menutab%10 eq 2}?'active':''"><a href="/tbHold/remember">业主成员</a></li>
                         <li th:class="${menutab%10 eq 4}?'active':''"><a href="/Feature">业主账号</a></li>
                     </ul>
                 </li>

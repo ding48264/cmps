@@ -46,6 +46,7 @@ public class TbHold implements Serializable {
     * qq
     */
     private String qq;
+    private  TbHouse tbHouse;
 
 
     public Integer getItemid() {

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的小区</title>
+    <link th:href="@{/component/bootstrap-3.3.7/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/service-team/style.css}" rel="stylesheet">
+    <link th:href="@{/component/inspinia/css/plugins/sweetalert/sweetalert.css}" rel="stylesheet">
+
+    <script th:src="@{/component/js/jquery-2.2.4.js}"></script>
+    <script th:src="@{/component/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
+    <script th:src="@{/component/inspinia/js/plugins/sweetalert/sweetalert.min.js}"></script>
+    <head th:replace="common/frame::frame-menu-head"></head>
+
+</head>
+<body>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <form id="insertForm"  class="form-horizontal"  th:object="${tbUptown}">
+            <input type="hidden" name="itemid" th:value="*{itemid}">
+            <div class="form-group">
+                <label for="inputname" class="col-sm-2 control-label">小区名称</label>
+                <div class="col-sm-10">
+                    <input type="text" name="name"class="form-control" id="inputname" placeholder="请输入小区名称"onblur="checkname()">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputpro" class="col-sm-2 control-label">小区省份</label>
+                <div class="col-sm-10">
+                    <input type="text" name="pro"  class="form-control" id="inputpro" placeholder="请输入小区所在省份"onblur="checkpro()">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputcity" class="col-sm-2 control-label">小区市区</label>
+                <div class="col-sm-10">
+                    <input type="text" name="city"  class="form-control" id="inputcity" placeholder="请输入小区城市" onblur="checkcity()">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputdistrict" class="col-sm-2 control-label">小区区县</label>
+                <div class="col-sm-10">
+                    <input type="text" name="district" class="form-control" id="inputdistrict" placeholder="请输入小区所在区"onblur="checkdistrict()">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddr" class="col-sm-2 control-label">小区地址</label>
+                <div class="col-sm-10">
+                    <input type="text" name="addr"class="form-control" id="inputAddr" placeholder="请输入小区详细地址"onblur="checkaddr()">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputphone" class="col-sm-2 control-label">联系方式</label>
+                <div class="col-sm-10">
+                    <input type="text" name="phone" class="form-control" id="inputphone" placeholder="请输入小区联系方式"onblur="checkphone()">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputarea" class="col-sm-2 control-label">小区面积</label>
+                <div class="col-sm-10">
+                    <input type="text" name="area"  class="form-control" id="inputarea" placeholder="请输入小区面积"onblur="checkarea()">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <div id="submitBtn"  class="btn btn-primary">保存</div>
+                    <button type="reset" class="btn btn-default" style="margin-left: 20px;">重置</button>
+                    <button type="reset" class="btn btn-default" style="margin-left: 20px;" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function checkname(){
+        var name = document.getElementById("inputname").value;
+        // console.log(name)
+        if(name==''){
+            alert("小区名不能为空！")
+        }
+    }
+    function checkpro(){
+        var pro = document.getElementById("inputpro").value;
+        if(pro==''){
+            alert("省份不能为空！")
+        }
+    }
+    function checkcity() {
+        var city = document.getElementById("inputcity").value;
+        if (city == '') {
+            alert("城市不能为空！")
+        }
+    }
+    function checkdistrict() {
+        var district = document.getElementById("inputdistrict").value;
+        if (district == '') {
+            alert("区县不能为空！")
+        }
+    }function checkaddr() {
+        var addr = document.getElementById("inputAddr").value;
+        if (addr == '') {
+            alert("地址不能为空！")
+        }
+    }function checkphone() {
+        var phone = document.getElementById("inputphone").value;
+        if (phone == '') {
+            alert("联系方式不能为空！")
+        }
+    }
+    function checkarea() {
+        var area = document.getElementById("inputarea").value;
+        if (area == '') {
+            alert("占地面积不能为空！")
+        }
+    }
+    $('#submitBtn').click(function () {
+        swal({
+            title: "确认插入？",
+            text: "此操作将不可撤销",
+            showCancelButton: true,
+            confirmButtonColor: "#2188dd",
+            confirmButtonText: "确认",
+            closeOnConfirm: false,
+            cancelButtonText:"取消"
+        }, function () {
+            // var uploadFile = $('#uploadFile');
+            var form = document.getElementById('insertForm');
+            var formData = new FormData(form);
+            // formData.append('uploadFile',uploadFile);
+            $.ajax({
+                url: "/tbUptown/doInsertUptown",
+                type: "POST",
+                data: formData,
+                dataType : "json",
+                /**
+                 *必须false才会自动加上正确的Content-Type
+                 */
+                contentType: false,
+                /**
+                 * 必须false才会避开jQuery对 formdata 的默认处理
+                 * XMLHttpRequest会对 formdata 进行正确的处理
+                 */
+                processData: false,
+                success: function (data) {
+                    if (data[0].status == "success") {
+                        swal({
+                            title: "已插入",
+                            text: "",
+                            type:"success",
+                            confirmButtonText: "确认",
+                        }, function () {
+                            window.location.reload();
+                        })
+                    }
+                    if (data[0].status == "failed") {
+                        swal({
+                            title: "没有需要插入的信息",
+                            text: "请修改需要插入的内容",
+                            type:"warning",
+                            confirmButtonText: "确认",
+                        }, function () {
+                            window.location.reload();
+                        })
+                    }
+                },
+                error: function () {
+                    alert("插入失败！");
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>

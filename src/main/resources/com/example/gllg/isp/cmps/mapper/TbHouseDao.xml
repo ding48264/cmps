@@ -73,8 +73,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="itemid" useGeneratedKeys="true">
-        insert into cpms.tb_house(housecode, building, unit, room, holdcode, area, type, state)
-        values (#{housecode}, #{building}, #{unit}, #{room}, #{holdcode}, #{area}, #{type}, #{state})
+        insert into cpms.tb_house(itemcode,housecode, building, unit, room, holdcode, area, type, state)
+        values (#{itemcode},#{housecode}, #{building}, #{unit}, #{room}, #{holdcode}, #{area}, #{type}, #{state})
     </insert>
 
     <!--通过主键修改数据-->
@@ -113,5 +113,13 @@
     <delete id="deleteById">
         delete from cpms.tb_house where itemid = #{itemid}
     </delete>
-
+    <delete id="deleteByHouseCode">
+        delete from tb_house
+        where itemcode=#{itemcode}
+    </delete>
+    <select id="selectHouse" resultMap="BaseResultMap">
+        select * from tb_house
+        where state=0
+        limit 1
+    </select>
 </mapper>

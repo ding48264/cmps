@@ -15,6 +15,30 @@
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="qq" column="qq" jdbcType="VARCHAR"/>
     </resultMap>
+    <resultMap id="extendHouse" type="com.example.gllg.isp.cmps.entity.TbHold">
+        <result property="itemid" column="itemid" jdbcType="INTEGER"/>
+        <result property="itemcode" column="itemcode" jdbcType="VARCHAR"/>
+        <result property="holdcode" column="holdcode" jdbcType="VARCHAR"/>
+        <result property="holdname" column="holdname" jdbcType="VARCHAR"/>
+        <result property="holdrela" column="holdrela" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="idcardno" column="idcardno" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="qq" column="qq" jdbcType="VARCHAR"/>
+        <association property="tbHouse" javaType="com.example.gllg.isp.cmps.entity.TbHouse">
+            <id property="itemid" column="itemid" jdbcType="INTEGER"/>
+            <result property="itemcode" column="itemcode" jdbcType="VARCHAR"/>
+            <result property="housecode" column="housecode" jdbcType="VARCHAR"/>
+            <result property="building" column="building" jdbcType="VARCHAR"/>
+            <result property="unit" column="unit" jdbcType="VARCHAR"/>
+            <result property="room" column="room" jdbcType="VARCHAR"/>
+            <result property="holdcode" column="holdcode" jdbcType="VARCHAR"/>
+            <result property="area" column="area" jdbcType="INTEGER"/>
+            <result property="type" column="type" jdbcType="VARCHAR"/>
+            <result property="state" column="state" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
@@ -70,11 +94,39 @@
             </if>
         </where>
     </select>
+    <select id="queryAllHold" resultMap="extendHouse">
+        select * from tb_hold hold left join tb_house house
+        on hold.holdcode = house.housecode
+          where 1=1
+          <if test="tbHold.holdname!=null and tbHold.holdname.trim().length>0">
+              <bind name="pattern" value="'%' + tbHold.holdname + '%'"/>
+              and CONCAT(holdname)like #{pattern}
+          </if>
+    </select>
+    <select id="queryAlls" resultType="com.example.gllg.isp.cmps.entity.TbHold">
+        select * from tb_hold hold left join tb_house house
+        on hold.holdcode = house.housecode
+        where 1=1
+        <if test="tbHold.holdname!=null and tbHold.holdname.trim().length>0">
+            <bind name="pattern" value="'%' + tbHold.holdname + '%'"/>
+            and CONCAT(holdname)like #{pattern}
+        </if>
+    </select>
+    <select id="queryMeb" resultType="com.example.gllg.isp.cmps.entity.TbHold">
+        select * from tb_hold
+        where holdcode=#{holdcode}
+        and holdrela &lt;&gt;'本人'
+    </select>
+    <select id="queryAllHoldOwn" resultType="com.example.gllg.isp.cmps.entity.TbHold">
+        select * from tb_hold
+        where holdrela='本人'
+    </select>
+
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="itemid" useGeneratedKeys="true">
-        insert into cpms.tb_hold(holdcode, holdname, holdrela, sex, age, idcardno, phone, qq)
-        values (#{holdcode}, #{holdname}, #{holdrela}, #{sex}, #{age}, #{idcardno}, #{phone}, #{qq})
+        insert into cpms.tb_hold(itemcode,holdcode, holdname, holdrela, sex, age ,idcardno, phone, qq)
+        values (#{itemcode},#{holdcode}, #{holdname}, #{holdrela}, #{sex},#{age},#{idcardno}, #{phone}, #{qq})
     </insert>
 
     <!--通过主键修改数据-->

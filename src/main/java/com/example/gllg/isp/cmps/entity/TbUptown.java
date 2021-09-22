@@ -1,5 +1,7 @@
 package com.example.gllg.isp.cmps.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2021-09-14 16:05:26
  */
+@Data
 public class TbUptown implements Serializable {
     private static final long serialVersionUID = -71216452878191636L;
     
