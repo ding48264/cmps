@@ -76,4 +76,9 @@ public class TbElectfeeServiceImpl implements TbElectfeeService {
     public boolean deleteById(Integer itemid) {
         return this.tbElectfeeDao.deleteById(itemid) > 0;
     }
+
+    @Override
+    public List<TbElectfee> queryAllElectFee(Integer pageNum, Integer pageSize) {
+        return this.tbElectfeeDao.queryAllElectFee(pageNum,pageSize);
+    }
 }

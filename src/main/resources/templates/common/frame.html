@@ -64,10 +64,11 @@
                 <li th:class="${menutab/10 eq 3}?'active':''">
                     <a href="#" class="menu-item"><span class="nav-label">费用管理</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li th:class="${menutab%10 eq 1}?'active':''"><a href="/tbWaterfee">水电收费</a></li>
+                        <li th:class="${menutab%10 eq 1}?'active':''"><a href="/tbWaterfee">水费收费</a></li>
                         <li th:class="${menutab%10 eq 2}?'active':''"><a href="/ServiceTeam">房屋收费</a></li>
-                        <li th:class="${menutab%10 eq 3}?'active':''"><a href="/DevelopingProject">物业收费</a></li>
+                        <li th:class="${menutab%10 eq 3}?'active':''"><a href="/tbGasfee">煤气收费</a></li>
                         <li th:class="${menutab%10 eq 4}?'active':''"><a href="/Feature">车辆收费</a></li>
+                        <li th:class="${menutab%10 eq 5}?'active':''"><a href="/tbElectfee">电费收费</a></li>
                     </ul>
                 </li>
                 <li th:class="${menutab/10 eq 4}?'active':''">

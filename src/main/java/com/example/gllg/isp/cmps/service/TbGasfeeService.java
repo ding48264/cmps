@@ -55,4 +55,5 @@ public interface TbGasfeeService {
      */
     boolean deleteById(Integer itemid);
 
+    List queryAllGasFee(Integer pageNum,Integer pageSize);
 }

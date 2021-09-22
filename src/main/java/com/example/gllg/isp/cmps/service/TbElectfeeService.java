@@ -55,4 +55,5 @@ public interface TbElectfeeService {
      */
     boolean deleteById(Integer itemid);
 
+    List<TbElectfee> queryAllElectFee(Integer pageNum,Integer pageSize);
 }

@@ -76,4 +76,9 @@ public class TbGasfeeServiceImpl implements TbGasfeeService {
     public boolean deleteById(Integer itemid) {
         return this.tbGasfeeDao.deleteById(itemid) > 0;
     }
+
+    @Override
+    public List queryAllGasFee(Integer pageNum, Integer pageSize) {
+        return this.tbGasfeeDao.queryAllGasFee(pageNum,pageSize);
+    }
 }

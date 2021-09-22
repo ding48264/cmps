@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的小区</title>
+    <link th:href="@{/component/bootstrap-3.3.7/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/service-team/style.css}" rel="stylesheet">
+    <link th:href="@{/component/inspinia/css/plugins/sweetalert/sweetalert.css}" rel="stylesheet">
+
+    <script th:src="@{/component/js/jquery-2.2.4.js}"></script>
+    <script th:src="@{/component/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
+    <script th:src="@{/component/inspinia/js/plugins/sweetalert/sweetalert.min.js}"></script>
+    <head th:replace="common/frame::frame-menu-head"></head>
+
+</head>
+
+<body>
+<div id="wrapper">
+    <div th:replace="common/frame::frame-menu(14)"></div>
+    <div id="page-wrapper" class="gray-bg" style="min-height: 275px;">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top white-bg frame-head" role="navigation" style="margin-bottom: 0">
+                <ul class="nav navbar-top-links navbar-right">
+                    <li><span class="m-r-sm text-muted welcome-message">“智慧”小区物业系统</span></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="wrapper wrapper-content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins" style="min-height: 800px">
+                        <!--表单-->
+                      <div class="row" style="margin-left: 50px">
+                          <a href="#modal-container-insert" role="button" style="margin-left: 87%"class="btn btn-primary btn-sm"
+                             data-toggle="modal" data-backdrop="static" >煤气费抄表</a>
+                      </div>
+                      <div class="panel-body team-table-body" th:fragment="hold_table_pages" id="holdTablePagesTag">
+                            <table class="table table-striped table-hover team-table">
+                                <thead class="team-table-head">
+                                <tr>
+                                    <th>煤气费表ID</th>
+                                    <th>对象名称</th>
+                                    <th>上期度数</th>
+                                    <th>本期度数</th>
+                                    <th>上期读表时间</th>
+                                    <th>本期读表时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="empList">
+                                <tr th:each="tbgas,status : ${tbGasfee}">
+                                    <td th:text="${tbgas.itemcode}"></td>
+                                    <td th:text="${tbgas.introduce}"></td>
+                                    <td th:text="${tbgas.lastdegree}"></td>
+                                    <td th:text="${tbgas.currentdegree}"></td>
+                                    <td th:text="${tbgas.lastttime}"></td>
+                                    <td th:text="${tbgas.currenttime}"></td>
+                                    <td>
+                                        <a href="#modal-container-update" role="button" class="btn"
+                                           data-toggle="modal" data-backdrop="static" th:attr="up-no=${tbgas.itemid}">更新</a>
+                                        <!--<a id="updatehold" th:href="@{/tbGasfee/updatePage(itemid=${hold.itemid})}" >修改</a>-->
+                                        <button id="deletehold" onclick="delecthold(this)" th:value="${tbgas.itemid}">删除</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="pages" >
+                                <ul >
+                                    <li th:if="${tbGasfee.pageNum le tbGasfee.pages}">
+                                        <a th:href="@{/tbGasfee/search(pageNum=1)}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li th:if="${(tbGasfee.pageNum) eq tbGasfee.pages} and ${(tbGasfee.pageNum)-2 gt 0}" >
+                                        <a th:text="${(tbGasfee.pageNum)-2}" th:href="@{/tbGasfee/search(pageNum=${(tbGasfee.pageNum)-2})}"></a>
+                                    </li>
+                                    <li th:if="${(tbGasfee.pageNum) gt 1}" >
+                                        <a th:text="${(tbGasfee.pageNum)-1}"
+                                           th:href="@{/tbGasfee/search(pageNum=${(tbGasfee.pageNum)-1})}"></a>
+                                    </li>
+                                    <li th:if="${tbGasfee.pageNum le tbGasfee.pages}"
+                                        style="background-color: rgba(119, 86, 55, 1)" >
+                                        <a th:text="${tbGasfee.pageNum}" th:href="@{/tbGasfee/search(pageNum=${tbGasfee.pageNum} )}" style="color: white;"></a>
+                                    </li>
+                                    <li th:if="${(tbGasfee.pageNum)+1 le tbGasfee.pages}">
+                                        <a th:text="${(tbGasfee.pageNum)+1}"
+                                           th:href="@{/tbGasfee/search(pageNum=${(tbGasfee.pageNum)+1})}"></a>
+                                    </li>
+                                    <li th:if="${(tbGasfee.pageNum)+1 lt 1} and ${tbGasfee.pages} gt 1">
+                                        <a th:text="${(tbGasfee.pageNum)+2}"
+                                           th:href="@{/tbGasfee/search(pageNum=${(tbGasfee.pageNum)+2} )}"></a>
+                                    </li>
+                                    <li  th:if="${tbGasfee.pageNum le tbGasfee.pages}">
+                                        <a th:href="@{/tbGasfee/search(pageNum=${tbGasfee.pages} )}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div id="jump-to-specify-page" th:if="${(tbGasfee.total) ne 0}">
+                                    <form action="/tbGasfee/search" class="form-inline"  method="get">
+                                        <span  style="float:left;width: 50px;height: 30px;text-align: center;line-height: 30px">跳至</span>
+                                        <input id="pageNum" name="pageNum" type="text" th:value="${tbGasfee.pageNum}" th:placeholder="${tbGasfee.pageNum}+'/'+${tbGasfee.pages}"
+                                               style="width: 60px;height:30px;float:left;">
+                                        <input name="keyword" type="text"
+                                               style="width: 60px;height:30px;float:left;display: none">
+                                        <button  type="submit" class="btn btn-default" style="width: 40px;height: 30px;">go</button>
+                                    </form>
+                                </div>
+                            </div>
+                </div>
+                    </div> <!--ibox-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 更新模态框 -->
+<div class="modal fade" id="modal-container-update" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">更新煤气表信息</h4>
+            </div>
+            <div class="modal-body" id="emp-modal-body">
+            </div>
+            <!--
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>-->
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-container-insert" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel2">煤气费抄表</h4>
+            </div>
+            <div class="modal-body" id="insert-modal-body">
+            </div>
+            <!--
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>-->
+        </div>
+    </div>
+</div>
+<script>
+    function delecthold(obj){
+        swal({
+            title: "确认删除？",
+            text: "此操作将不可撤销",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+        }, function () {
+            var itemid = $(obj).val();
+            $.post("/tbGasfee/delete",{"itemid":itemid},function (resp) {
+                console.log(resp);
+                if (resp[0].status == "success"){
+                    swal({
+                        title: "Good job!",
+                        text: "删除成功!",
+                        type: "success"
+                    }, function () {
+                        var currentPageNum = $('#pageNum').val();
+                        window.location.href = "http://localhost:8080/tbGasfee?pageNum="+currentPageNum;
+                    });
+                } else {
+                    swal({
+                        title: "失败",
+                        text: "删除失败!",
+                        type: "error"
+                    });
+                }
+            },'json')
+        })
+    }
+    //插入模态框
+    $('#modal-container-insert').on('show.bs.modal', function (e) {
+        // 获得链接上自已添加的属性
+        const itemid = e.relatedTarget.getAttribute('up-no');
+        console.log(itemid);
+
+        $.get(`/tbGasfee/async/insert`, function (resp) {
+            // resp 是服务器响应的内容是 emp_update-content.html 模板页面的内容
+            $('#insert-modal-body').html(resp);
+        },'html');
+
+    })
+    // 更新模态框
+    $('#modal-container-update').on('show.bs.modal', function (e) {
+        // 获得链接上自已添加的属性
+        const itemid = e.relatedTarget.getAttribute('up-no');
+        console.log(itemid);
+
+        $.get(`/tbGasfee/async/update/${itemid}`, function (resp) {
+            // resp 是服务器响应的内容是 emp_update-content.html 模板页面的内容
+            $('#emp-modal-body').html(resp);
+        },'html');
+
+    })
+</script>
+</body>
+</html>

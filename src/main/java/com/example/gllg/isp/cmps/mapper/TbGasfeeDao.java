@@ -65,4 +65,6 @@ public interface TbGasfeeDao {
      */
     int deleteById(Integer itemid);
 
+    List queryAllGasFee(@Param("pageNum") Integer pageNum,
+                        @Param("pageSize") Integer pageSize);
 }

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的小区</title>
+    <link th:href="@{/component/bootstrap-3.3.7/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/service-team/style.css}" rel="stylesheet">
+    <link th:href="@{/component/inspinia/css/plugins/sweetalert/sweetalert.css}" rel="stylesheet">
+
+    <script th:src="@{/component/js/jquery-2.2.4.js}"></script>
+    <script th:src="@{/component/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
+    <script th:src="@{/component/inspinia/js/plugins/sweetalert/sweetalert.min.js}"></script>
+    <head th:replace="common/frame::frame-menu-head"></head>
+
+</head>
+<body>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <form id="insertForm"  class="form-horizontal"  th:object="${tbElectfee}">
+            <input type="hidden" name="itemid" th:value="*{itemid}">
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">选择小区</label>
+                <div class="col-sm-10">
+                    <select class="form-control js_select2" name="xiaoqu" id="example-select" onchange="setxiaoqu()">
+                        <option value>请选择</option>
+                        <option name="xiaoqu" th:each="tbuptown : ${tbUptowns}" th:value="${tbuptown.name}" th:text="${tbuptown.name}"></option>
+                    </select>
+                    <input type="hidden"value="" name="introduce" id="xiaoqu"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">楼栋</label>
+                <div class="col-sm-10">
+                    <select class="form-control js_select2" name="building" id="example-select2" onchange="setbuilding()">
+                        <option value>请选择</option>
+                        <option value="1">1栋</option>
+                        <option value="2">2栋</option>
+                    </select>
+                    <input type="hidden"value="" name="building" id="building"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label  class="col-sm-2 control-label">单元</label>
+                <div class="col-sm-10">
+                    <select class="form-control js_select2" name="unit" id="example-select3"onchange="setunit()">
+                        <option value>请选择</option>
+                        <option value="1">1单元</option>
+                        <option value="2">2单元</option>
+                    </select>
+                    <input type="hidden"value="" name="unit" id="unit"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">房屋</label>
+                <div class="col-sm-10">
+                    <select class="form-control js_select2" name="unit" id="example-select4" onchange="setroom()">
+                        <option value>请选择</option>
+                        <option value="101">101房间</option>
+                        <option value="102">102房间</option>
+                        <option value="103">103房间</option>
+                        <option value="104">104房间</option>
+                        <option value="105">105房间</option>
+                        <option value="201">201房间</option>
+                        <option value="202">202房间</option>
+                        <option value="203">203房间</option>
+                        <option value="204">204房间</option>
+                        <option value="205">205房间</option>
+                        <option value="301">301房间</option>
+                        <option value="302">302房间</option>
+                        <option value="303">303房间</option>
+                        <option value="304">304房间</option>
+                        <option value="305">305房间</option>
+                        <option value="401">401房间</option>
+                        <option value="402">402房间</option>
+                        <option value="403">403房间</option>
+                        <option value="404">404房间</option>
+                        <option value="405">405房间</option>
+                        <option value="501">501房间</option>
+                        <option value="502">502房间</option>
+                        <option value="503">503房间</option>
+                        <option value="504">504房间</option>
+                        <option value="505">505房间</option>
+                    </select>
+                </div>
+                <input type="hidden"value="" name="room" id="room"/>
+            </div>
+            <div class="form-group">
+                <label for="inputidcardno" class="col-sm-2 control-label">上期度数</label>
+                <div class="col-sm-10">
+                    <input type="text" name="lastdegree" th:value="*{lastdegree}" class="form-control" id="inputidcardno">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputphone" class="col-sm-2 control-label">本期度数</label>
+                <div class="col-sm-10">
+                    <input type="text" name="currentdegree"  class="form-control" id="inputphone" value="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputqq" class="col-sm-2 control-label">上期读表时间</label>
+                <div class="col-sm-10">
+                    <input type="date" name="lastttime" th:data="*{lastttime}" class="form-control" id="currenttime">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputqq" class="col-sm-2 control-label">本期读表时间</label>
+                <div class="col-sm-10">
+                    <input type="date" name="currenttime" class="form-control" id="inputqq">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <div id="submitBtn"  class="btn btn-primary">保存</div>
+                    <button type="reset" class="btn btn-default" style="margin-left: 20px;">重置</button>
+                    <button type="reset" class="btn btn-default" style="margin-left: 20px;" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function setxiaoqu(){
+            var $context = $('#example-select');
+            console.log("value:"+$context.val())
+            $('#xiaoqu').val ($context.val());
+        console.log($('#xiaoqu').val())
+    }
+    function setbuilding(){
+        var $context2 = $('#example-select2');
+        console.log("value:"+$context2.val())
+        $('#building').val ($context2.val());
+        console.log($('#building').val())
+        $('#xiaoqu').val($('#xiaoqu').val()+$('#building').val()+"栋");
+        console.log($('#xiaoqu').val())
+    }
+    function setunit(){
+        var $context3 = $('#example-select3');
+        console.log("value:"+$context3.val())
+        $('#unit').val ($context3.val());
+        console.log($('#unit').val())
+        $('#xiaoqu').val($('#xiaoqu').val()+$('#unit').val()+"单元");
+        console.log($('#xiaoqu').val())
+    }
+    function setroom(){
+        var $context4 = $('#example-select4');
+        console.log("value:"+$context4.val())
+        $('#room').val ($context4.val());
+        console.log($('#room').val())
+        $('#xiaoqu').val($('#xiaoqu').val()+$('#room').val()+"房间");
+        console.log($('#xiaoqu').val())
+    }
+    $('#submitBtn').click(function () {
+        swal({
+            title: "确认插入？",
+            text: "此操作将不可撤销",
+            showCancelButton: true,
+            confirmButtonColor: "#2188dd",
+            confirmButtonText: "确认",
+            closeOnConfirm: false,
+            cancelButtonText:"取消"
+        }, function () {
+            // var uploadFile = $('#uploadFile');
+            var form = document.getElementById('insertForm');
+            var xiaoquname=$('#example-select').val();
+            var formData = new FormData(form);
+            console.log("formData",formData)
+            // formData.append('uploadFile',uploadFile);
+            $.ajax({
+                url: "/tbElectfee/doInsertWater",
+                type: "POST",
+                data: formData,
+                dataType : "json",
+                /**
+                 *必须false才会自动加上正确的Content-Type
+                 */
+                contentType: false,
+                /**
+                 * 必须false才会避开jQuery对 formdata 的默认处理
+                 * XMLHttpRequest会对 formdata 进行正确的处理
+                 */
+                processData: false,
+                success: function (data) {
+                    if (data[0].status == "success") {
+                        swal({
+                            title: "已插入",
+                            text: "",
+                            type:"success",
+                            confirmButtonText: "确认",
+                        }, function () {
+                            window.location.reload();
+                        })
+                    }
+                    if (data[0].status == "failed") {
+                        swal({
+                            title: "没有需要插入的信息",
+                            text: "请修改需要插入的内容",
+                            type:"warning",
+                            confirmButtonText: "确认",
+                        }, function () {
+                            window.location.reload();
+                        })
+                    }
+                },
+                error: function () {
+                    alert("插入失败！");
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>

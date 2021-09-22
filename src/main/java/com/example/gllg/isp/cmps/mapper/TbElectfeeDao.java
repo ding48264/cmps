@@ -65,4 +65,6 @@ public interface TbElectfeeDao {
      */
     int deleteById(Integer itemid);
 
+    List<TbElectfee> queryAllElectFee(@Param("pageNum") Integer pageNum,
+                                      @Param("pageSize") Integer pageSize);
 }
