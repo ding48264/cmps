@@ -80,6 +80,14 @@
                         <li th:class="${menutab%10 eq 3}?'active':''"><a href="/DevelopingProject">业主车辆</a></li>
                     </ul>
                 </li>
+                <li th:class="${menutab/10 eq 5}?'active':''">
+                    <a href="#" class="menu-item"><span class="nav-label">系统设置</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li th:class="${menutab%10 eq 1}?'active':''"><a href="/SignalSourceManagement">修改密码</a></li>
+                        <li th:class="${menutab%10 eq 2}?'active':''"><a href="/ServiceTeam">退出系统</a></li>
+                        <li th:class="${menutab%10 eq 3}?'active':''"><a href="/DevelopingProject">关于系统</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>
