@@ -76,4 +76,13 @@ public class TbHouseServiceImpl implements TbHouseService {
     public boolean deleteById(Integer itemid) {
         return this.tbHouseDao.deleteById(itemid) > 0;
     }
+
+    @Override
+    public int deleteByhouseCode(String itemcode) {
+        return this.tbHouseDao.deleteByHouseCode(itemcode);
+    }
+    @Override
+    public TbHouse selectUse() {
+        return this.tbHouseDao.selectHouse();
+    }
 }

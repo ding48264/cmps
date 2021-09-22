@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择业主</title>
+    <link th:href="@{/component/bootstrap-3.3.7/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/service-team/style.css}" rel="stylesheet">
+    <link th:href="@{/component/inspinia/css/plugins/sweetalert/sweetalert.css}" rel="stylesheet">
+
+    <script th:src="@{/component/js/jquery-2.2.4.js}"></script>
+    <script th:src="@{/component/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
+    <script th:src="@{/component/inspinia/js/plugins/sweetalert/sweetalert.min.js}"></script>
+    <head th:replace="common/frame::frame-menu-head"></head>
+
+</head>
+<body>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+
+        <table class="table table-striped table-hover team-table">
+            <thead class="team-table-head">
+            <tr>
+                <th>业主ID</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>联系方式</th>
+                <th>身份证</th>
+                <th>QQ</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="empList">
+            <form action="/tbHold/selectHold">
+            <tr th:each="hold,status : ${tbHolds}">
+                <td th:text="${hold.itemcode}"></td>
+                <td th:text="${hold.holdname}"></td>
+                <td th:text="${hold.sex}"></td>
+                <td th:text="${hold.age}"></td>
+                <td th:text="${hold.phone}"></td>
+                <td th:text="${hold.idcardno}"></td>
+                <td th:text="${hold.qq}"></td>
+                <td>
+                    <!--<button class="btn btn-default"style="background-color:rgba(214, 0, 0, 1)"type="submit"-->
+                                                        <!--name="itemid" th:value="${hold.itemid}"> 选择</button>-->
+                    <!--<button id="selectHold"class="btn btn-default"style="background-color:rgba(214, 0, 0, 1)" onclick="selectHold(this)" th:value="${hold.itemid}">选择</button>-->
+                    <a th:href="@{/tbHold/selectHold(itemid=${hold.itemid})}"class="btn btn-default"style="background-color:rgb(55,214,32)">选择</a>
+                </td>
+            </tr>
+            </form>
+            </tbody>
+        </table>
+
+        <div class="pages" >
+            <ul >
+                <li th:if="${tbHolds.pageNum le tbHolds.pages}">
+                    <a th:href="@{/tbHold/search(pageNum=1)}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li th:if="${(tbHolds.pageNum) eq tbHolds.pages} and ${(tbHolds.pageNum)-2 gt 0}" >
+                    <a th:text="${(tbHolds.pageNum)-2}" th:href="@{/tbHold/search(pageNum=${(tbHolds.pageNum)-2})}"></a>
+                </li>
+                <li th:if="${(tbHolds.pageNum) gt 1}" >
+                    <a th:text="${(tbHolds.pageNum)-1}"
+                       th:href="@{/tbHold/search(pageNum=${(tbHolds.pageNum)-1})}"></a>
+                </li>
+                <li th:if="${tbHolds.pageNum le tbHolds.pages}"
+                    style="background-color: rgba(119, 86, 55, 1)" >
+                    <a th:text="${tbHolds.pageNum}" th:href="@{/tbHold/search(pageNum=${tbHolds.pageNum} )}" style="color: white;"></a>
+                </li>
+                <li th:if="${(tbHolds.pageNum)+1 le tbHolds.pages}">
+                    <a th:text="${(tbHolds.pageNum)+1}"
+                       th:href="@{/tbHold/search(pageNum=${(tbHolds.pageNum)+1})}"></a>
+                </li>
+                <li th:if="${(tbHolds.pageNum)+1 lt 1} and ${tbHolds.pages} gt 1">
+                    <a th:text="${(tbHolds.pageNum)+2}"
+                       th:href="@{/tbHold/search(pageNum=${(tbHolds.pageNum)+2} )}"></a>
+                </li>
+                <li  th:if="${tbHolds.pageNum le tbHolds.pages}">
+                    <a th:href="@{/tbHold/search(pageNum=${tbHolds.pages} )}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+            <div id="jump-to-specify-page" th:if="${(tbHolds.total) ne 0}">
+                <form action="/tbHold/search" class="form-inline"  method="get">
+                    <span  style="float:left;width: 50px;height: 30px;text-align: center;line-height: 30px">跳至</span>
+                    <input id="pageNum" name="pageNum" type="text" th:value="${tbHolds.pageNum}" th:placeholder="${tbHolds.pageNum}+'/'+${tbHolds.pages}"
+                           style="width: 60px;height:30px;float:left;">
+                    <input name="keyword" type="text"
+                           style="width: 60px;height:30px;float:left;display: none">
+                    <button  type="submit" class="btn btn-default" style="width: 40px;height: 30px;">go</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function selectHold(obj){
+        swal({
+            title: "选择业主？",
+            text: "确定选择",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#45dd0e",
+            confirmButtonText: "选择!",
+            closeOnConfirm: false
+        }, function () {
+            var itemid = $(obj).val();
+            $.post("/tbHold/selectHold",{"itemid":itemid},function (resp) {
+                console.log(resp);
+                if (resp[0].status == "success"){
+                    swal({
+                        title: "Good job!",
+                        text: "即将跳转!",
+                        type: "success"
+                    }, function () {
+                    });
+                } else {
+                    swal({
+                        title: "失败",
+                        text: "出现异常!",
+                        type: "error"
+                    });
+                }
+            },'json')
+        })
+    }
+    $('#submitBtn').click(function () {
+        swal({
+            title: "确认插入？",
+            text: "此操作将不可撤销",
+            showCancelButton: true,
+            confirmButtonColor: "#2188dd",
+            confirmButtonText: "确认",
+            closeOnConfirm: false,
+            cancelButtonText:"取消"
+        }, function () {
+            // var uploadFile = $('#uploadFile');
+            var form = document.getElementById('insertForm');
+            var formData = new FormData(form);
+            // formData.append('uploadFile',uploadFile);
+            $.ajax({
+                url: "/tbUptown/doInsertUptown",
+                type: "POST",
+                data: formData,
+                dataType : "json",
+                /**
+                 *必须false才会自动加上正确的Content-Type
+                 */
+                contentType: false,
+                /**
+                 * 必须false才会避开jQuery对 formdata 的默认处理
+                 * XMLHttpRequest会对 formdata 进行正确的处理
+                 */
+                processData: false,
+                success: function (data) {
+                    if (data[0].status == "success") {
+                        swal({
+                            title: "已插入",
+                            text: "",
+                            type:"success",
+                            confirmButtonText: "确认",
+                        }, function () {
+                            window.location.reload();
+                        })
+                    }
+                    if (data[0].status == "failed") {
+                        swal({
+                            title: "没有需要插入的信息",
+                            text: "请修改需要插入的内容",
+                            type:"warning",
+                            confirmButtonText: "确认",
+                        }, function () {
+                            window.location.reload();
+                        })
+                    }
+                },
+                error: function () {
+                    alert("插入失败！");
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>

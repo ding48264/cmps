@@ -1,6 +1,8 @@
 package com.example.gllg.isp.cmps.service;
 
 import com.example.gllg.isp.cmps.entity.TbHold;
+import com.example.gllg.isp.cmps.entity.TbHouse;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -55,4 +57,14 @@ public interface TbHoldService {
      */
     boolean deleteById(Integer itemid);
 
+    List<TbHold> queryAllHold(TbHold tbHold,
+                                Integer pageNum,
+                              Integer pageSize);
+
+
+    Page<TbHold> queryAllHolds(TbHold tbHold, Integer pageNum, Integer pageSize);
+
+    List<TbHold> queryMeb(String holdcode);
+
+    List<TbHold> queryAllHoldOwn(TbHold tbHold, Integer pageNum, Integer pageSize);
 }

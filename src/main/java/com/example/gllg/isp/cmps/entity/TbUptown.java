@@ -1,5 +1,7 @@
 package com.example.gllg.isp.cmps.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2021-09-14 16:05:26
  */
+@Data
 public class TbUptown implements Serializable {
     private static final long serialVersionUID = -71216452878191636L;
     
@@ -29,9 +32,13 @@ public class TbUptown implements Serializable {
     */
     private String city;
     /**
-    * 县
-    */
-    private String distinct;
+     * 县
+     */
+    private String district;
+    /**
+     * 地址
+     */
+    private String addr;
     /**
     * 电话
     */
@@ -90,18 +97,23 @@ public class TbUptown implements Serializable {
         this.city = city;
     }
 
-    public String getDistinct() {
-        return distinct;
+    public String getDistrict() {
+        return district;
     }
 
-    public void setDistinct(String distinct) {
-        this.distinct = distinct;
+    public void setDistrict(String district) {
+        this.district = district;
     }
 
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
+    public String getAddr() {
+        return addr;
+    }
     public String getPhone() {
         return phone;
     }
-
     public void setPhone(String phone) {
         this.phone = phone;
     }
